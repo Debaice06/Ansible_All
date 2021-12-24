@@ -1,0 +1,3 @@
+https://www.tecmint.com/understand-core-components-of-ansible/#coreansible
+
+https://www.tutorialspoint.com/ansible/ansible_yaml_basics.htm

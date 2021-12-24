@@ -1,0 +1,20 @@
+-
+  name: nginx installation
+  hosts: web1
+  tasks:
+  - yum:
+      name: nginx
+      state: present
+  - service:
+      name: nginx
+      state: started
+      enabled: yes
+  - unarchive:
+      src: /root/nginx.zip
+      dest: /usr/share/nginx/html
+      remote_src: yes
+
+  - replace:
+      path: /usr/share/nginx/html/index.html
+      regexp: 'This is sample html code'
+      replace: 'This is KodeKloud Ansible lab'

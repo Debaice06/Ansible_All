@@ -1,0 +1,21 @@
+## ansible-playbook playbook.yml --start-at-task "Start httpd Service"
+
+## ansible-playbook playbook.yml --tags "Start httpd Service"
+
+## ansible-playbook playbook.yml --skip-tags "install"
+
+
+## ansible -m setup localhost | grep distribution_version
+## ansible -m setup web1 -i inventory | grep distribution
+## ansible -m setup web1 -i inventory > /home/thor/playbooks/web/web-facts.txt
+##  ansible -a 'free -m' ansible_client
+
+
+
+
+
+
+
+
+
+

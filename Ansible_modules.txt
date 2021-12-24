@@ -1,0 +1,171 @@
+---
+- hosts: web2
+  tasks:
+    - name: Installing httpd
+      yum:
+        name: httpd
+        state: present
+
+    - name: Change Apache port
+      replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: "Listen 80"
+        replace: "Listen 8082"
+
+    - name: Restart Apache service
+      service:
+        name: httpd
+        state: restarted
+
+    - name: Installed firewalld
+      yum:
+        name: firewalld
+        state: present
+    - name: start firewalld service
+      service:
+         name: firewalld
+         state: started
+         enabled: yes
+    - name: Add firewall rule for Apache
+      firewalld:
+         port: 8082/tcp
+         zone: public
+         permanent: yes
+         state: enabled
+         immediate: true
+		 
+===========================================
+
+---
+- hosts: web2
+  tasks:
+    - name: Install pkgs
+      yum:
+        name: httpd, firewalld
+        state: present
+
+    - name: Start/Enable services
+      service:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      with_items:
+        - httpd
+        - firewalld
+
+    - name: Change Apache port
+      replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: "Listen 80"
+        replace: "Listen 8082"
+
+    - name: restart Apache
+      service:
+        name: httpd
+        state: restarted
+
+    - name: Add firewall rule for Apache
+      firewalld:
+        port: 8082/tcp
+        zone: public
+        permanent: yes
+        state: enabled
+        immediate: true
+		
+============================================
+
+-
+  name: file permission
+  hosts: web1
+  tasks:
+  - file:
+      path: /opt/data/perm.txt
+      mode: 0640
+      state: touch
+	  
+-
+  name: create index.html on web1
+  hosts: web1
+  tasks:
+  - lineinfile:
+      path: /var/www/html/index.html
+      line: 'This line was added using Ansible lineinfile module!'
+      create: yes
+
+-
+  name: webservice port change
+  hosts: web1
+  tasks:
+  - replace:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: "Listen 80"
+      replace: "Listen 8080"
+  - service:
+      name: httpd
+      state: restarted
+
+=================================
+-
+  name: Untar,Copy and removed Tar file
+  hosts: web1
+  tasks:
+  - unarchive:
+      src: /root/data.tar.gz
+      dest: /srv
+      remote_src: yes
+  - file:
+      path: /root/data.tar.gz
+      state: absent
+	  
+  - unarchive:
+      src: https://github.com/kodekloudhub/Hello-World/archive/master.zip
+      dest: /root
+      remote_src: yes
+	  
+=========Compress using multiple files============
+-
+  name: BZ2
+  hosts: web1
+  tasks:
+  - archive:
+      path:
+      - /root/file1.txt
+      - /usr/local/share/file2.txt
+      - /var/log/lastlog
+      dest: /root/files.tar.bz2
+      format: bz2
+	  
+========Cron Job=============================
+-
+  name: cron job
+  hosts: node00
+  tasks:
+  - cron:
+      name: "Clear Lastlog"
+	  weekday: "0"
+      minute: "0"
+      hour: "0"
+      job: echo "" > /var/log/lastlog
+  
+  - cron:
+      name: "Check Memory"
+      state: absent
+
+  - cron:
+      name: "cleanup"
+      job: rm -rf /tmp/delete/*
+      special_time: reboot
+
+========== User/Group===============================
+-
+  name: Create User
+  hosts: all 
+  tasks:
+  - group:
+      name: admin
+      state: present
+  - user:
+      name: admin
+      uid: 2048
+      group: admin
+
