@@ -1,0 +1,5 @@
+-
+  hosts: Ansible-Client
+  tasks:
+  - name: Directory Creation
+    command: mkdir BJIT

@@ -1,0 +1,15 @@
+- 
+  hosts: Ansible-Client
+  tasks:
+  - name: Archive a file
+    archive:
+      path: /tmp/delete
+      dest: /tmp/test.tar
+      format: tar
+
+  - name: Unarchive file
+    unarchive:
+      src: /tmp/test.tar
+      dest: /tmp/test
+      remote_src: yes
+    tags: Unarchive

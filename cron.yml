@@ -1,0 +1,21 @@
+-
+  hosts: Ansible-Client
+  tasks:
+  - name: "File Copy Uisng Cron Job"
+    copy:
+      src: /opt/file_copy.sh
+      dest: /opt
+
+  - name: Adding Permission
+    command: chmod a+x /opt/file_copy.sh
+
+
+  - name: "Add Cron Job"
+    cron:
+      minute: 20
+      hour: 11
+      job: sh /tmp/file_copy.sh
+
+  - name: delete cron job
+    command: crontab -r
+    tags: remove_cronjob
