@@ -1,0 +1,11 @@
+-
+  name: User Add
+  hosts: target1
+  tasks:
+  - group:
+      name: Admin
+      state: present
+  - user:
+      name: Admin123
+      uid: 2050
+      group: Admin

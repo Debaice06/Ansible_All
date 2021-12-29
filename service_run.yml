@@ -1,0 +1,9 @@
+-
+    name: Service Start
+    hosts: ansible_client
+    tasks:
+        - name: Service Start
+          yum:
+            name: httpd
+            state: absent 
+      

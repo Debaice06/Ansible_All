@@ -1,0 +1,10 @@
+-
+  name: Playbook Execution
+  hosts: Ansible-Client
+  tasks:
+    - name: RAM Check from 192.168.56.101
+      command: free -m
+   # - name: http Installation
+   #   yum:
+   #     name: httpd
+   #     state: present

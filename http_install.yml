@@ -1,0 +1,15 @@
+-
+  name: Apache Installation
+  hosts: target1
+  tasks:
+  - yum:
+      name: httpd
+      state: present
+    tags: service install
+
+  - service:
+      name: httpd
+      state: started
+      enabled: yes
+    tags: service check
+

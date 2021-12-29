@@ -1,0 +1,15 @@
+-
+  name: Compress a file
+  hosts: target1
+  tasks:
+  - archive:
+      path: /opt/resolv.conf
+      dest: /tmp/resolv.conf.zip
+      format: zip
+    tags: zip
+  - unarchive:
+      src: /tmp/resolv.conf.zip
+      dest: /usr/local/
+      remote_src: yes
+    tags: unzip
+

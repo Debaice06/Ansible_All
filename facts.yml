@@ -1,0 +1,7 @@
+---
+- name: Print Hello Message
+  hosts: ansible_client
+  gather_facts: yes
+  tasks:
+  - debug:
+      var: ansible_facts

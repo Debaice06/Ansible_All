@@ -1,0 +1,9 @@
+-
+  name: Play
+  hosts: target1
+  tasks:
+  - shell: cat /etc/hosts
+    register: result
+
+  - debug:
+      var: result.stdout

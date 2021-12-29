@@ -1,0 +1,9 @@
+-
+  name: Disk CleanUp
+  hosts: Ansible-Client
+  tasks:
+  - cron:
+    # name: "cleanup"
+      name: "Anything"
+      job: rm -rf /tmp/delete/*
+      special_time: reboot

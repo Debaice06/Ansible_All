@@ -1,0 +1,10 @@
+-
+  name: User Remove
+  hosts: target1
+  tasks:
+  - user:
+      name: Admin123
+      state: absent
+  - group:
+      name: Admin
+      state: absent

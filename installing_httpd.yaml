@@ -1,0 +1,14 @@
+---
+  name: Playbook Execution
+  hosts: Ansible-Client
+  tasks:
+    - name: Installing Apache
+      yum:
+        name: httpd
+        state: present
+		
+    - name: Starting Apache Service
+      service:
+        name: httpd
+        enabled: yes
+	state: started

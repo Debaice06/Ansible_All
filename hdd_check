@@ -1,0 +1,6 @@
+-
+    name: HDD check
+    hosts: ansible_client
+    tasks:
+      - name: Hard Disk Check
+        command: df -hT

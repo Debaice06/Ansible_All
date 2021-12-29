@@ -1,0 +1,5 @@
+#target1 ansible_host=192.168.56.105 ansible_user=root ansible_ssh_password=123456  ansible_become=yes ansible_become_user=deba
+
+#target1 ansible_host=192.168.56.105 ansible_user=root ansible_ssh_password=123456 dns_server=10.5.5.4
+target1 ansible_host=192.168.56.105 ansible_user=root ansible_ssh_password=123456
+

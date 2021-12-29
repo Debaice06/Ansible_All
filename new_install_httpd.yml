@@ -1,0 +1,14 @@
+-
+   name: Apache Installation Using Playbook
+   hosts: Ansible-Client
+   tasks:
+   - name: Apache Installation
+     yum:
+        name: httpd
+        state: absent
+
+   - name: Apache Service Start    
+     service:
+        name: httpd
+        state: started
+        enabled: yes

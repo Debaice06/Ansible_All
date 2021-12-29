@@ -1,0 +1,20 @@
+--- 
+- name: File Cop From Controller To Slave Server
+  hosts: ansible_client
+  tasks:
+  - name: File Copy resolve.conf
+    copy:
+      src=/etc/resolv.conf
+      dest=/tmp
+    tags: File_copy
+
+  - name: File Copy hostname
+    copy:
+      src=/etc/hostname
+      dest=/tmp
+    tags: File_copy_hostname
+  
+  - name: Version Check
+    shell: cat /etc/redhat-release > /opt/versioninfo.txt
+    tags: Version
+

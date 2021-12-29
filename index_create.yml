@@ -1,0 +1,13 @@
+-
+  hosts: Ansible-Client
+  tasks:
+  - name: index.html file creation
+    file:
+      path: /usr/share/nginx/html/index.html
+      state: touch
+  
+  - name: Contect add into file    
+    copy:
+      dest: /usr/share/nginx/html/index.html
+      content:
+        Hello From Debashis

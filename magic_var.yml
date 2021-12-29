@@ -1,0 +1,6 @@
+-
+  name: Magic Variable
+  hosts: all
+  tasks:
+  - debug:
+      msg: "{{ hostvars['target1'].dns_server }}"
